@@ -97,6 +97,10 @@ class PlaceDetailViewController: UIViewController,UINavigationControllerDelegate
         let tokens:[String] = p.components(separatedBy: " ")
         return tokens[0]
     }
+    
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        return NSAttributedString(string: placesNames[row], attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
+    }
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
