@@ -46,14 +46,6 @@ class PlaceDescription{
     }
     
     public init (jsonStr: String){
-        self.name = ""
-        self.description = ""
-        self.category = ""
-        self.address_title = ""
-        self.address_street = ""
-        self.elevation = 0.0
-        self.latitude = 0.0
-        self.longitude = 0.0
         
         if let data: NSData = jsonStr.data(using: String.Encoding.utf8) as NSData?{
             do{
@@ -67,7 +59,7 @@ class PlaceDescription{
                 self.latitude = (dict!["latitude"] as? Float)!
                 self.longitude = (dict!["longitude"] as? Float)!
             } catch {
-                print("unable to convert Json to a dictionary")
+                print("Parsing Exception")
                 
             }
         }
@@ -91,10 +83,9 @@ class PlaceDescription{
                                    "elevation" : elevation, "latitude" : latitude, "longitude" : longitude] as [String : Any]
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: dict, options: JSONSerialization.WritingOptions.prettyPrinted)
-            // here "jsonData" is the dictionary encoded in JSON data
             jsonStr = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
         } catch let error as NSError {
-            print("unable to convert dictionary to a Json Object with error: \(error)")
+            print("Exception \(error)")
         }
         return jsonStr
     }

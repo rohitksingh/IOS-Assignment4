@@ -92,12 +92,14 @@ class PlaceDetailViewController: UIViewController,UINavigationControllerDelegate
         self.selectplacelabel.resignFirstResponder()
     }
 
+
     func pickerView (_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         let p:String = placesNames[row]
         let tokens:[String] = p.components(separatedBy: " ")
         return tokens[0]
     }
     
+    // Picker text color customiztion
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         return NSAttributedString(string: placesNames[row], attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
     }

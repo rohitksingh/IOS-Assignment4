@@ -22,12 +22,11 @@ import UIKit
 
 class PlaceListTableViewController: UITableViewController {
     
-    
-    let controller = PlaceLibrary()
+    @IBOutlet weak var placeTableListView: UITableView!
     var placesList:[String:PlaceDescription] = [String:PlaceDescription]()
     var names:[String] = [String]()
     
-    @IBOutlet weak var placeTableListView: UITableView!
+    let controller = PlaceLibrary()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,19 +38,16 @@ class PlaceListTableViewController: UITableViewController {
         
     }
     
-    // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return names.count
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        print("tableView editing row at: \(indexPath.row)")
+
         if editingStyle == .delete {
             let selectedPlace:String = names[indexPath.row]
             placesList.removeValue(forKey: selectedPlace)
@@ -61,7 +57,7 @@ class PlaceListTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Get and configure the cell...
+    
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlaceList", for: indexPath)
         let places = placesList[names[indexPath.row]]! as PlaceDescription
         cell.textLabel?.text = places.name
@@ -70,9 +66,7 @@ class PlaceListTableViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object (and model) to the new view controller.
-        //NSLog("seque identifier is \(String(describing: segue.identifier))")
+
         if segue.identifier == "DetailSegue" {
             let viewController:PlaceDetailViewController = segue.destination as! PlaceDetailViewController
             let indexPath = self.tableView.indexPathForSelectedRow!
@@ -82,25 +76,23 @@ class PlaceListTableViewController: UITableViewController {
         }
     }
     
-    @IBAction func unwindWithSegue(_ segue: UIStoryboardSegue) {
-        
-    }
-    
-    
     @objc func onDidReceiveData(_ notification:Notification) {
         
-        guard let dic = notification.object as? PlaceDescription else {
+        guard let place = notification.object as? PlaceDescription else {
             return
         }
-        print("Hi i am here 3")
-
-        let newPlace:PlaceDescription = PlaceDescription(name: dic.name, description: dic.description,
-                                                         category: dic.category, address_title: dic.address_title,
-                                                         address_street: dic.address_street , elevation: dic.elevation,
-                                                         latitude: dic.latitude, longitude: dic.longitude)
-        self.placesList[dic.name] = newPlace
+        
+        let newPlace:PlaceDescription = PlaceDescription(name: place.name, description: place.description,
+                                                         category: place.category, address_title: place.address_title,
+                                                         address_street: place.address_street , elevation: place.elevation,
+                                                         latitude: place.latitude, longitude: place.longitude)
+        self.placesList[place.name] = newPlace
         self.names = Array(self.placesList.keys).sorted()
         self.tableView.reloadData()
+    }
+    
+    @IBAction func unwindWithSegue(_ segue: UIStoryboardSegue) {
+        
     }
     
 }
