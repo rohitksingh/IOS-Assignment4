@@ -76,18 +76,4 @@ class PlaceDescription{
         self.longitude = (dict["longitude"] as? NSNumber)?.floatValue ?? 0
     }
     
-    public func toJsonString() -> String {
-        var jsonStr = "";
-        let dict:[String : Any] = ["name": name,"description" :description ,"category": category,
-                                   "address_title" : address_title, "address_street" :address_street,
-                                   "elevation" : elevation, "latitude" : latitude, "longitude" : longitude] as [String : Any]
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: dict, options: JSONSerialization.WritingOptions.prettyPrinted)
-            jsonStr = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
-        } catch let error as NSError {
-            print("Exception \(error)")
-        }
-        return jsonStr
-    }
-    
 }

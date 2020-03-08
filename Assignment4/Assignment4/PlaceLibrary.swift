@@ -25,7 +25,7 @@ public class PlaceLibrary{
     var placesList:[String:PlaceDescription] = [String:PlaceDescription]()
     var names:[String] = [String]()
     
-    func getData() -> [String:PlaceDescription]{
+    func getAllPlaces() -> [String:PlaceDescription]{
         
         if let path = Bundle.main.path(forResource: "places", ofType: "json"){
             do {
@@ -37,26 +37,11 @@ public class PlaceLibrary{
                     self.placesList[places] = place
                 }
             } catch {
-                print("List not loading")
+                
             }
         }
         
         return placesList
     }
-    
-    
-    func toJsonString() -> String {
-        var jsonStr = "";
-        let dict:[String : Any] = ["name": names, "category": Category.self] as [String : Any]
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: dict, options: JSONSerialization.WritingOptions.prettyPrinted)
-            // here "jsonData" is the dictionary encoded in JSON data
-            jsonStr = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
-        } catch let error as NSError {
-            print("unable to convert dictionary to a Json Object with error: \(error)")
-        }
-        return jsonStr
-    }
-    
     
 }

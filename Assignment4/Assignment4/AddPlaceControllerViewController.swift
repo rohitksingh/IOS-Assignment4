@@ -45,10 +45,10 @@ class AddPlaceControllerViewController: UIViewController {
             
             
         case "cancel":
-            print("cancel bar item")
+            print("Cancel Bar Item clicked")
             
         default:
-            print("unexpected segue identifier")
+            print("Default option")
         }
     }
     
