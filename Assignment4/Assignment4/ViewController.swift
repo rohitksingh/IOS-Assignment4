@@ -42,25 +42,30 @@ class ViewController: UIViewController,UINavigationControllerDelegate, UIPickerV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        name.text = "\(place[selectedPlace]!.name)"
-        desc.text = "\(place[selectedPlace]!.description)"
-        category.text = "\(place[selectedPlace]!.category)"
-        addressTitle.text = "\(place[selectedPlace]!.address_title)"
-        addressStreet.text = "\(place[selectedPlace]!.address_street)"
-        elevation.text = "\(place[selectedPlace]!.elevation)"
-        latitude.text = "\(place[selectedPlace]!.latitude)"
-        longitude.text = "\(place[selectedPlace]!.longitude)"
-        distance.text = "\(place[selectedPlace]!.distance)"
-        bearing.text = "\(place[selectedPlace]!.bearing)"
-        
-        
+        setUpUi()
         self.title = place[selectedPlace]?.name
+        setUpPicker()
+    }
+    
+    func setUpUi(){
+        name.text = place[selectedPlace]!.name
+        desc.text = place[selectedPlace]!.description
+        category.text = place[selectedPlace]!.category
+        addressTitle.text = place[selectedPlace]!.address_title
+        addressStreet.text = place[selectedPlace]!.address_street
+        elevation.text = place[selectedPlace]!.elevation.description
+        latitude.text = place[selectedPlace]!.latitude.description
+        longitude.text = place[selectedPlace]!.longitude.description
+        distance.text = place[selectedPlace]!.distance.description
+        bearing.text = place[selectedPlace]!.bearing.description
+    }
+    
+    func setUpPicker(){
         placePicker.delegate = self
         placePicker.dataSource = self
         placePicker.removeFromSuperview()
         selectplacelabel.inputView = placePicker
-        selectedPlace =  (placesNames.count > 0) ? placesNames[0] : "unknown unknown"
+        selectedPlace =  (placesNames.count > 0) ? placesNames[0] : "Unknown Place"
         let place:[String] = selectedPlace.components(separatedBy: " ")
         selectplacelabel.text = place[0]
     }
@@ -78,15 +83,11 @@ class ViewController: UIViewController,UINavigationControllerDelegate, UIPickerV
         let thisPlace = placesNames[row]
         let tokens:[String] = thisPlace.components(separatedBy: " ")
         self.selectplacelabel.text = tokens[0]
-        print(place[thisPlace]!.longitude)
-        print(place[thisPlace]!.latitude)
-
-        let setDistance = getDistance(latitude: Double(place[thisPlace]!.latitude), longitude: Double(place[thisPlace]!.longitude))
-
-        let setBearing =  getBearing(latitude: Double(place[thisPlace]!.latitude), longitude: Double(place[thisPlace]!.longitude))
-
+        
+        let setDistance = AppUtility.getDistance(currentPlace: place[selectedPlace]! , selectedPlace: place[thisPlace]!)
+        let setBearing =  AppUtility.getBearing(currentPlace: place[selectedPlace]! , selectedPlace: place[thisPlace]!)
+        
         distance.text = String(setDistance)+" KM"
-
         bearing.text = String(setBearing)+" Degree"
 
         self.selectplacelabel.resignFirstResponder()
@@ -106,65 +107,4 @@ class ViewController: UIViewController,UINavigationControllerDelegate, UIPickerV
         return placesNames.count
     }
 
-    func getDistance(latitude:Double, longitude :Double) -> Double {
-        
-        var lat1 = 0.0
-        var lat2 = 0.0
-        var lon1 = 0.0
-        var lon2 = 0.0
-        
-        lat1 = Double(place[selectedPlace]!.latitude)
-        lon1 = Double(place[selectedPlace]!.longitude)
-        
-        lat2 = latitude
-        lon2 = longitude
-        
-        if ((lat1 == lat2) && (lon1 == lon2)) {
-            return zero
-        } else {
-            let theta = lon1 - lon2
-            var dist = sin(deg2rad(lat1)) * sin(deg2rad(lat2))
-                + cos(deg2rad(lat1)) * cos(deg2rad(lat2))
-                * cos(deg2rad(theta))
-            dist = acos(dist)
-            dist = radiansToDegrees(radians: dist)
-            dist = dist * 60 * 1.1515 * 1.609344
-            return (dist)
-        }
-    }
-    
-    func getBearing(latitude:Double, longitude :Double) -> Double {
-        
-        var lat1 = 0.0
-        var lat2 = 0.0
-        var lon1 = 0.0
-        var lon2 = 0.0
-        
-        lat1 = Double(place[selectedPlace]!.latitude)
-        lat1 = deg2rad(lat1)
-        
-        lon1 = Double(place[selectedPlace]!.longitude)
-        
-        lat2 = latitude
-        lat2 = deg2rad(lat2)
-        
-        lon2 = longitude
-        
-        let longDiff = deg2rad(lon2 - lon1)
-        let y = sin(longDiff) * cos(lat2)
-        let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(longDiff)
-        
-        return (radiansToDegrees(radians: atan2(y, x)) + 360).truncatingRemainder(dividingBy:360)
-    }
-    
-    func deg2rad(_ number: Double) -> Double {
-        return number * .pi / 180
-    }
-    
-    func radiansToDegrees (radians: Double)->Double {
-        return radians * 180 / .pi
-    }
-    
 }
-
-

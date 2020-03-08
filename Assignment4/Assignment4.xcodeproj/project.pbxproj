@@ -17,6 +17,7 @@
 		141774E0241495BE00BC98A8 /* PlaceDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141774DF241495BE00BC98A8 /* PlaceDescription.swift */; };
 		141774E22414960100BC98A8 /* PlaceLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141774E12414960100BC98A8 /* PlaceLibrary.swift */; };
 		141774E424149BD400BC98A8 /* AddPlaceControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141774E324149BD400BC98A8 /* AddPlaceControllerViewController.swift */; };
+		141774E62415931E00BC98A8 /* AppUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141774E52415931E00BC98A8 /* AppUtility.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		141774DF241495BE00BC98A8 /* PlaceDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDescription.swift; sourceTree = "<group>"; };
 		141774E12414960100BC98A8 /* PlaceLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceLibrary.swift; sourceTree = "<group>"; };
 		141774E324149BD400BC98A8 /* AddPlaceControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlaceControllerViewController.swift; sourceTree = "<group>"; };
+		141774E52415931E00BC98A8 /* AppUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUtility.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 				141774DF241495BE00BC98A8 /* PlaceDescription.swift */,
 				141774E12414960100BC98A8 /* PlaceLibrary.swift */,
 				141774E324149BD400BC98A8 /* AddPlaceControllerViewController.swift */,
+				141774E52415931E00BC98A8 /* AppUtility.swift */,
 			);
 			path = Assignment4;
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				141774E62415931E00BC98A8 /* AppUtility.swift in Sources */,
 				141774CA2414935A00BC98A8 /* ViewController.swift in Sources */,
 				141774DC241494AF00BC98A8 /* PlaceListTableViewController.swift in Sources */,
 				141774E0241495BE00BC98A8 /* PlaceDescription.swift in Sources */,
