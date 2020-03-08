@@ -74,7 +74,7 @@ class PlaceListTableViewController: UITableViewController {
         // Pass the selected object (and model) to the new view controller.
         //NSLog("seque identifier is \(String(describing: segue.identifier))")
         if segue.identifier == "DetailSegue" {
-            let viewController:ViewController = segue.destination as! ViewController
+            let viewController:PlaceDetailViewController = segue.destination as! PlaceDetailViewController
             let indexPath = self.tableView.indexPathForSelectedRow!
             viewController.place = self.placesList
             viewController.selectedPlace = self.names[indexPath.row]

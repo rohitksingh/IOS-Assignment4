@@ -19,7 +19,7 @@
  */
 import UIKit
 
-class ViewController: UIViewController,UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+class PlaceDetailViewController: UIViewController,UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
     @IBOutlet weak var name: UITextView!
     @IBOutlet weak var desc: UITextView!
@@ -38,7 +38,6 @@ class ViewController: UIViewController,UINavigationControllerDelegate, UIPickerV
     var selectedPlace:String = "Select a Place"
     
     var placesNames:[String] = [String]()
-    let zero = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
